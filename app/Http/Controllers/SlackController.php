@@ -3,7 +3,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Input;
 use Illuminate\Http\Request;
-use Validator,Slack;
+use Validator;
+use Slack;
 
 class SlackController extends Controller
 {
