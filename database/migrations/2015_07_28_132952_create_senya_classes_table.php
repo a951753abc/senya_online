@@ -14,7 +14,7 @@ class CreateSenyaClassesTable extends Migration
     {
         Schema::create('senya_classes', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('class_version')->comment = "版本";
+            $table->tinyInteger('class_version')->comment = "版本";
             $table->tinyInteger('class_name')->comment = "級別名稱編號";
             $table->text('class_define')->comment = "級別解說";
             $table->tinyInteger('class_str');

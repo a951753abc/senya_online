@@ -1,10 +1,11 @@
 @extends('master')
-@section('title', '頁面標題')
-@section('sidebar')
-    @parent
-
-    <p>這邊會附加在主要的側邊欄。</p>
+@section('css')
+    <link href="{{ URL::asset('/css/bootstrap-table.min.css') }}" rel="stylesheet">
+@endsection
+@section('script')
+    <script src="{{ URL::asset('/js/bootstrap-table.min.js') }}"></script>
+    <script src="{{ URL::asset('/js/bootstrap-table-zh-TW.min.js') }}"></script>
 @endsection
 @section('content')
-    <p>這是我的主要內容。</p>
+
 @endsection
