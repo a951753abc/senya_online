@@ -12,6 +12,7 @@
 */
 Route::get('home', 'Senya\SenyaController@index');
 Route::get('admin', 'Admin\AdminController@index');
+Route::get('admin/version', 'Admin\VersionController@index');
 Route::get('roll','SlackController@roll');
 Route::get('test','SlackController@roll_test');
 
