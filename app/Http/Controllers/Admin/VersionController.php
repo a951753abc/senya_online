@@ -42,7 +42,20 @@ class VersionController extends AdminController
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'version' => 'required',
+        ]);
+
+        $version = Senya_version::firstOrCreate(['version' => $request->version]);
+        print_r($version);
+        if ($version['wasRecentlyCreated'] == 1){
+            return redirect()->route('admin.index')
+                             ->with('message','新增成功');
+        }
+        else{
+            return redirect()->route('admin.index')
+                      ->with('message','此版本已存在');
+        }
     }
 
     /**
