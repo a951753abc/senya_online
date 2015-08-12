@@ -9,7 +9,7 @@ class SenyaController extends Controller
 {
 	function index()
 	{
-		$class = senya_class::all()->first();;
+		$class = senya_class::all();
 		print_r($class);
 		// return view('senya.class',$data);
 	}
