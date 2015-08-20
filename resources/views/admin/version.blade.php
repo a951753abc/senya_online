@@ -12,10 +12,16 @@
     <script src="{{ URL::asset('/js/bootstrap-table-zh-TW.min.js') }}"></script>
     <script type="text/javascript">
         $(function() {
-            
-            // $("button[name='add']").click(function(){
-            //     $( "#dialog" ).dialog( "open" );
-            // });
+            $('.btn-primary').click(function(){
+                $('#versionForm').submit();
+            });
+            @if (count($errors) > 0)
+                @foreach ($errors->all() as $error)
+                    alert('{{ $error }}');
+                @endforeach
+            @elseif(session('message'))
+                alert('{{ session('message') }}');
+            @endif
         });
     </script>
 @endsection
@@ -43,7 +49,7 @@
                                 <i class="glyphicon glyphicon-remove"></i>
                             </a>
                         </td>
-                        <td>{{ $value['id'] }}</td>
+                        <td>{{ $key+1 }}</td>
                         <td>{{ $value['version'] }}</td>
                     </tr>
                 @endforeach
@@ -51,14 +57,19 @@
         </table>
     </div>
     <div class="modal fade" id="myModal">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-sm">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">新增級別</h4>
+                    <h4 class="modal-title">新增版本</h4>
                 </div>
                 <div class="modal-body">
-                    <p>One fine body&hellip;</p>
+                    <form id="versionForm" method="post" action="{{ route('admin.store') }}">
+                        <div class="form-group">
+                            <input type="text" name="version" placeholder="輸入版本號" class="form-control"/>
+                            <input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
+                        </div>
+                    </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">關閉</button>
