@@ -15,6 +15,7 @@ Route::get('admin', 'Admin\AdminController@index');
 Route::get('admin/version', ['as'=>'admin.index','uses'=>'Admin\VersionController@index']);
 Route::post('admin/version', ['as'=>'admin.store','uses'=>'Admin\VersionController@store']);
 Route::get('roll','SlackController@roll');
+Route::get('vote','SlackController@vote');
 Route::get('test','SlackController@roll_test');
 
 // 認證路由

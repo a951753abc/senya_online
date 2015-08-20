@@ -59,4 +59,15 @@ class SlackController extends Controller
    		Slack::send($dice_show);
    		return $dice_res;
     }
+
+    public function vote()
+    {
+        if (Input::get('token') != 'BpJwfRmGLk24PgwlepLdf5mx')
+            exit;
+        if (Input::has('text')){
+
+        }
+        else
+            Slack::send("未輸入指令");
+    }
 }
