@@ -17,6 +17,7 @@ Route::post('admin/version', ['as'=>'admin.store','uses'=>'Admin\VersionControll
 Route::get('roll','SlackController@roll');
 Route::get('vote','SlackController@vote');
 Route::get('test','SlackController@roll_test');
+Route::get('skill','LhtrpgController@index');
 
 // 認證路由
 Route::get('auth/login', 'Auth\AuthController@getLogin');
