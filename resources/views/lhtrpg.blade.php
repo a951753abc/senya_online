@@ -7,6 +7,7 @@
 </head>
 <body>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="{{ URL::asset('/js/sheetrock.js') }}"></script>
 <div class="skin" style="padding: 0px;  width: 335px; height: 405px;">
 
     <div class="skillWrap">
@@ -43,29 +44,14 @@
         </p>
     </div>
 </div>
-    <div id="table"></div>
+<table id="statistics" class="table table-condensed table-striped"></table>
 </body>
 </html>
 
 <script type="text/javascript">
-
-    $(function(){
-        var URL = 'http://spreadsheets.google.com/tq?1bHgaYiM2dWuP-anjaUCSLITxnbwiApIMKzvBCQhzfpE/edit?pli=1#gid=506015321';
-        google.load('visualization', '1', {packages: ['table']});
-        var query = new google.visualization.Query(URL);
-        // 使用 query language 查詢資料
-        query.setQuery('SELECT * ');
-        query.send(handleQueryResponse);
+    var url = 'https://docs.google.com/spreadsheets/d/1bHgaYiM2dWuP-anjaUCSLITxnbwiApIMKzvBCQhzfpE/edit#gid=367257500';
+    $('#statistics').sheetrock({
+        url: url
     });
-    function handleQueryResponse(response) {
-        if (response.isError()) {
-            alert('Error in query: ' + response.getMessage() + ' ' + response.getDetailedMessage());
-            return;
-        }
 
-        // Create and draw the visualization.
-        var data = response.getDataTable();
-        var jsonData = JSON.parse(data.toJSON());
-        alert(jsonData);
-    }
 </script>
