@@ -148,6 +148,7 @@ return [
          * Slack Dice
          */
         'Maknz\Slack\SlackServiceProvider',
+        'Maatwebsite\Excel\ExcelServiceProvider',
     ],
 
     /*
@@ -196,6 +197,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
         'Slack'     => 'Maknz\Slack\Facades\Slack',
+        'Excel'     => 'Maatwebsite\Excel\Facades\Excel', 
 
     ],
 

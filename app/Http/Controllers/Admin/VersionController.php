@@ -47,14 +47,11 @@ class VersionController extends AdminController
         ]);
 
         $version = Senya_version::firstOrCreate(['version' => $request->version]);
-        print_r($version);
         if ($version['wasRecentlyCreated'] == 1){
-            return redirect()->route('admin.index')
-                             ->with('message','新增成功');
+            return redirect()->route('admin.index')->with('message','新增成功');
         }
         else{
-            return redirect()->route('admin.index')
-                      ->with('message','此版本已存在');
+            return redirect()->route('admin.index')->with('message','此版本已存在');
         }
     }
 

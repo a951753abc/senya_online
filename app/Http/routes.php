@@ -14,10 +14,14 @@ Route::get('home', 'Senya\SenyaController@index');
 Route::get('admin', 'Admin\AdminController@index');
 Route::get('admin/version', ['as'=>'admin.index','uses'=>'Admin\VersionController@index']);
 Route::post('admin/version', ['as'=>'admin.store','uses'=>'Admin\VersionController@store']);
+Route::post('admin/version', ['as'=>'admin.destroy','uses'=>'Admin\VersionController@destroy']);
 Route::get('roll','SlackController@roll');
 Route::get('vote','SlackController@vote');
 Route::get('test','SlackController@roll_test');
+
+//LHZ
 Route::get('skill','LhtrpgController@index');
+Route::post('skill/upload', 'LhtrpgController@upload');
 
 // 認證路由
 Route::get('auth/login', 'Auth\AuthController@getLogin');

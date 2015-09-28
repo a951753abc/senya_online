@@ -218,7 +218,7 @@
     // Default row template: Output a row object as an HTML table row. Use "td"
     // for table body row, "th" for table header rows.
     var toHTML = function (row) {
-        var tag = (row.num) ? 'td' : 'th';
+        var tag = (row.num) ? 'td' : '';
         var cells = Object.keys(row.cells);
         var html = '';
         cells.forEach(function (key) {

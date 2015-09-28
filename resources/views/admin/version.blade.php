@@ -19,9 +19,14 @@
                 @foreach ($errors->all() as $error)
                     alert('{{ $error }}');
                 @endforeach
-            @elseif(session('message'))
+            @elseif (session('message'))
                 alert('{{ session('message') }}');
             @endif
+            $(".glyphicon-remove").click(function() {
+                check = confirm('確定要刪除嗎？');
+                if (check)
+                    alert($(this).attr('attr-id'));
+            });
         });
     </script>
 @endsection
@@ -44,10 +49,8 @@
                 @foreach ($list as $key => $value)
                     <tr>
                     	<td class="text-center">
-                            <a href="#">
                                 <i class="glyphicon glyphicon-pencil"></i>
-                                <i class="glyphicon glyphicon-remove"></i>
-                            </a>
+                            <a href="#"><i class="glyphicon glyphicon-remove" attr-id={{ $value['id'] }}></i></a>
                         </td>
                         <td>{{ $key+1 }}</td>
                         <td>{{ $value['version'] }}</td>

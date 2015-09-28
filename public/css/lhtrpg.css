@@ -1,11 +1,6 @@
-
 ul{
     display: block;
     list-style-type: disc;
-    -webkit-margin-before: 0px;
-    -webkit-margin-after: 0px;
-    -webkit-margin-start: 0px;
-    -webkit-margin-end: 0px;
 }
 
 .skin {
@@ -15,7 +10,6 @@ ul{
     position: relative;
     text-shadow: none;
 }
-
 
 div.skillWrap {
     background-repeat: no-repeat;
@@ -28,10 +22,6 @@ div.skillWrap {
 
 h3 {
     display: block;
-    -webkit-margin-before: 0px;
-    -webkit-margin-after: 0px;
-    -webkit-margin-start: 0px;
-    -webkit-margin-end: 0px;
     font-weight: bold;
 }
 
@@ -40,7 +30,9 @@ h3.skillTitle {
     color: #fff;
     padding: 3px;
     font-size: 18px;
-    line-height:20px;
+    line-height: 25px;
+    margin-top: 0px;
+    margin-bottom: 0px;
 }
 
 
@@ -50,6 +42,8 @@ ul.skillTags {
     padding: 0px 5px 5px 5px;
     font-size: 10px;
     height: 20px;
+    margin-top: 0px;
+    margin-bottom: 0px;
 }
 
 ul.skillTags li {
@@ -109,10 +103,6 @@ p.skillFunction {
 }
 
 hr.skillHr {
-    -moz-border-bottom-colors: none;
-    -moz-border-left-colors: none;
-    -moz-border-right-colors: none;
-    -moz-border-top-colors: none;
     border-color: #666;
     border-image: none;
     border-style: dotted none none;
