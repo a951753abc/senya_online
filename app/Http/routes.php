@@ -16,7 +16,8 @@ Route::get('admin/version', ['as'=>'admin.index','uses'=>'Admin\VersionControlle
 Route::post('admin/version', ['as'=>'admin.store','uses'=>'Admin\VersionController@store']);
 Route::post('admin/version', ['as'=>'admin.destroy','uses'=>'Admin\VersionController@destroy']);
 Route::get('roll','SlackController@roll');
-Route::get('vote','SlackController@vote');
+Route::get('sroll','SlackController@sroll');
+
 Route::get('test','SlackController@roll_test');
 
 //LHZ

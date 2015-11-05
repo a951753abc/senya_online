@@ -8,6 +8,8 @@ use Slack;
 
 class SlackController extends Controller
 {
+
+    protected $channel;
    
     function roll()
     {
@@ -16,17 +18,55 @@ class SlackController extends Controller
 	    if(Input::has('text')){
 		    $dice_text = Input::get('text');//轉大小寫
 			$user = Input::get('user_name');
-			//$res = str_split($dice_text);//全部分割
-			Slack::send($user."丟出".$dice_text."的結果是:");
+            $this->setChannel(Input::get('channel_name'));
+            if ($this->channel == 'privategroup')
+			    Slack::send($user."丟出".$dice_text."的結果是:");
+            else
+                Slack::to('#'.$this->channel)->send($user."丟出".$dice_text."的結果是:");
 			$dice = $this->dice_filter($dice_text);
 			$p = eval('return '.$dice.';');
 			if($p==0)
 				Slack::send('格式錯誤');
-			else	
-				Slack::send($dice.'合計：'.(int)$p);
+			else {	
+                if ($this->channel == 'privategroup')
+				    Slack::send($dice.'合計：'.(int)$p);
+                else
+                    Slack::to('#'.$this->channel)->send($dice.'合計：'.(int)$p);
+            }
 		}
 		else
 			Slack::send("未輸入指令");
+        $text = Input::all();
+        Slack::send($text);
+    }
+
+    protected $roll_user;
+    protected $gm;
+
+    function sroll()
+    {
+        if(Input::get('token')!='BpJwfRmGLk24PgwlepLdf5mx')
+            exit;
+        if(Input::has('text')){
+            $text = explode(' ', Input::get('text'));
+            $dice_text = $text[1];
+
+            $user = Input::get('user_name');
+            $this->setUser($user);
+            $this->setGm($text[0]);
+            Slack::to('@'.$this->roll_user)->send($user."丟出".$dice_text."的結果是:");
+            Slack::to('@'.$this->gm)->send($user."丟出".$dice_text."的結果是:");
+            $dice = $this->dice_filter($dice_text, 1);
+            $p = eval('return '.$dice.';');
+            if($p==0)
+                Slack::send('格式錯誤');
+            else {    
+                Slack::to('@'.$this->roll_user)->send($dice.'合計：'.(int)$p);
+                Slack::to('@'.$this->gm)->send($dice.'合計：'.(int)$p);
+            }
+        }
+        else
+            Slack::send("未輸入指令");
     }
 
     function roll_test()
@@ -38,16 +78,16 @@ class SlackController extends Controller
 	   	$p = eval('return '.$dice.';');
 		echo (int)$p;
     }
-    protected function dice_filter($dice)
+    protected function dice_filter($dice, $type=null)
     {
         $num = 0;
    	    while (preg_match("/\d+[Dd]\d+/",$dice,$result)) {
-   		    $dice_result = $this->dice_rolling($result[0]);
+   		    $dice_result = $this->dice_rolling($result[0], $type);
    			$dice = preg_replace ("/\d+[Dd]\d+/",$dice_result,$dice,1);
    	    }
    		return $dice;
     }
-    protected function dice_rolling($dice){
+    protected function dice_rolling($dice, $type=null){
    	    $dice = explode("D",strtoupper($dice));
    		$dice_res=0;
    		$dice_show=null;
@@ -56,18 +96,33 @@ class SlackController extends Controller
    			$dice_show = $dice_show."「".$dice_tmp."」";
    			$dice_res = $dice_res+$dice_tmp;
    		}
-   		Slack::send($dice_show);
+        if ($type) {
+            Slack::to('@'.$this->roll_user)->send($dice_show);
+            Slack::to('@'.$this->gm)->send($dice_show);
+        }
+        else {
+            if ($this->channel == 'privategroup')            
+   		        Slack::send($dice_show);
+            else
+                Slack::to('#'.$this->channel)->send($dice_show);
+        }
    		return $dice_res;
     }
 
-    public function vote()
+    public function setUser($user)
     {
-        if (Input::get('token') != 'BpJwfRmGLk24PgwlepLdf5mx')
-            exit;
-        if (Input::has('text')){
-
-        }
-        else
-            Slack::send("未輸入指令");
+        $this->roll_user = $user;
     }
+
+    public function setGm($user)
+    {
+        $this->gm = $user;
+    }
+
+    public function setChannel($channel)
+    {
+        $this->channel = $channel;
+    }
+
+
 }

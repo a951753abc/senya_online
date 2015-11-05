@@ -50,15 +50,19 @@
             <div class="skillTh">限制</div>
             <div class="skillTd">{{$value['限制']}}</div>
             <p class="skillFunction">
-                <b>效果：</b>
-                {{$value['效果']}}
+                <font size="2em">
+                    <b>效果：</b>
+                    {{$value['效果']}}
+                </font>
             </p>
             <hr class="skillHr">
             <p class="skillFunction">
-                <b>解說：</b>
-                @if (isset($value['解說']))
-                    {{$value['解說']}}
-                @endif
+                <font size="2em">
+                    <b>解說：</b>
+                    @if (isset($value['解說']))
+                        {{$value['解說']}}
+                    @endif
+                </font>
             </p>
         </div>
     </div>
@@ -87,11 +91,11 @@
         $html .= '<div class="skillTh clear">對象</div><div class="skillTd">'.$value['對象'].'</div>';
         $html .= '<div class="skillTh">射程</div><div class="skillTd">'.$value['射程'].'</div><br><div class="skillTh clear">代價</div>';
         $html .= '<div class="skillTd">'.$value['代價'].'</div>';
-        $html .= '<div class="skillTh">限制</div><div class="skillTd">'.$value['限制'].'</div><p class="skillFunction"><b>效果：</b>';
-        $html .= $value['效果'].'</p><hr class="skillHr"><p class="skillFunction"><b>解說：</b>';
+        $html .= '<div class="skillTh">限制</div><div class="skillTd">'.$value['限制'].'</div><p class="skillFunction"><font size="2em"><b>效果：</b>';
+        $html .= $value['效果'].'</font></p><hr class="skillHr"><p class="skillFunction"><font size="2em"><b>解說：</b>';
         if (isset($value['解說']))
             $html .= $value['解說'];
-        $html .= '</p></div></div>';
+        $html .= '</font></p></div></div>';
         echo htmlspecialchars($html);
     ?>
     </textarea>
