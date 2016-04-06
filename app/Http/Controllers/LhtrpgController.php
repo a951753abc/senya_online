@@ -9,6 +9,8 @@ class LhtrpgController extends Controller
 {
     public function index()
     {
+        /** push test @todo:HA*/
+
         return view('lhtrpg');
     }
 
